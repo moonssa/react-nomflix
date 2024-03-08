@@ -86,6 +86,14 @@ const logoVariants = {
     },
   },
 };
+const navVariants = {
+  top: {
+    backgroundColor: "rgba(0,0,0,0)",
+  },
+  scroll: {
+    backgroundColor: "rgba(0,0,0,1)",
+  },
+};
 const Input = styled(motion.input)`
   transform-origin: right center;
   position: absolute;
@@ -119,14 +127,17 @@ function Header() {
   useMotionValueEvent(scrollY, "change", (latest) => {
     console.log("Page scroll: ", latest);
     if (latest > 80) {
-      navAnimation.start({ backgroundColor: "rgba(0,0,0,1)" });
+      // navAnimation.start({ backgroundColor: "rgba(0,0,0,1)" });
+      navAnimation.start("scroll");
     } else {
-      navAnimation.start({ backgroundColor: "rgba(0,0,0,0)" });
+      // navAnimation.start({ backgroundColor: "rgba(0,0,0,0)" });
+      navAnimation.start("top");
     }
   });
 
   return (
-    <Nav initial={{ backgroundColor: "rgba(0,0,0,0)" }} animate={navAnimation}>
+    // <Nav initial={{ backgroundColor: "rgba(0,0,0,0)" }} animate={navAnimation}>
+    <Nav variants={navVariants} initial={"top"} animate={navAnimation}>
       <Col>
         <Logo
           variants={logoVariants}
